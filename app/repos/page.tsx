@@ -1,5 +1,8 @@
 import Link from 'next/link';
 import { FaStar, FaCodeBranch, FaEye } from 'react-icons/fa';
+import {redirect} from 'next/navigation';
+import {  getServerSession } from "next-auth/next";
+import { authOptions } from "../api/auth/[...nextauth]/route";
 
 async function fetchRepos() {
   const response = await fetch(
@@ -127,6 +130,10 @@ interface Repository {
   
 
 const ReposPage = async () => {
+  const session = await getServerSession( authOptions)
+  if(!session){
+    redirect('/signIn?callbackUrl=/repos');
+  }
   const repos = await fetchRepos();
 
   return (

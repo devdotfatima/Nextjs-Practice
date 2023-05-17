@@ -6,8 +6,11 @@ import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import { AppBar, Toolbar, Typography, Button } from "@mui/material";
 
 const Header = () => {
+  const {data:session}=useSession();
   return (
-    <AppBar position="static">
+    <>
+    {session && (
+      <AppBar position="static">
       <Toolbar>
        
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
@@ -27,6 +30,9 @@ const Header = () => {
         </Button>
       </Toolbar>
     </AppBar>
+    )}
+    </>
+    
   );
 };
 export default Header;

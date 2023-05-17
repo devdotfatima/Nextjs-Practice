@@ -1,6 +1,12 @@
-import React from 'react'
+import {redirect} from 'next/navigation';
+import {  getServerSession } from "next-auth/next";
+import { authOptions } from "./api/auth/[...nextauth]/route";
+const HomePage = async () => {
+  const session = await getServerSession( authOptions)
+  if(!session){
+    redirect('/signIn?callbackUrl=/');
+  }
 
-const HomePage = () => {
   return (
     <div>HomePage</div>
   )

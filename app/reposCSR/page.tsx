@@ -1,6 +1,7 @@
 
 'use client';
 import { useState, useEffect } from 'react';
+import {  useSession } from "next-auth/react";
 import Loading from '../loading';
 import CourseSearch from '../components/CourseSearch';
 import Link from 'next/link';
@@ -115,6 +116,10 @@ interface License {
 }
 
 const Repository = async () => {
+ 
+  const {data:session}=useSession({
+    required:true
+  });
   
   const [coursesData, setCoursesData] = useState([]);
   const [loading, setLoading] = useState(true);

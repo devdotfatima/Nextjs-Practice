@@ -1,5 +1,8 @@
 import { Suspense } from 'react';
 import Link from 'next/link';
+import {redirect} from 'next/navigation';
+import {  getServerSession } from "next-auth/next";
+import { authOptions } from "../../api/auth/[...nextauth]/route";
 
 interface RouteParams {
     name: string;
@@ -18,6 +21,10 @@ async function fetchContents(repoName:string) {
   return contents;
 }
 const RepoPage  = async({ params: { name } }) => {
+  const session = await getServerSession( authOptions)
+  if(!session){
+    redirect(`/signIn?callbackUrl=/repos/${name}`);
+  }
   const contents = await fetchContents(name);
   const dirs = contents.filter((item:any) => item.type === 'dir');
   console.log(dirs[0])
