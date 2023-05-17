@@ -24,13 +24,11 @@ export const metadata = {
 };
 
 export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
+  children,session
 }) {
   return (
     <html lang="en">
-      <SessionProvider>
+      <SessionProvider session={session}>
         <CacheProvider value={clientSideEmotionCache}>
           <ThemeProvider theme={theme}>
             <CssBaseline />

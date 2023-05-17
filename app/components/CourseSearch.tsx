@@ -18,7 +18,7 @@ const CourseSearch = ({ getSearchResults }:any) => {
         className='search-input'
         type='text'
         name='query'
-        placeholder='Search courses...'
+        placeholder='Search Repositries...'
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
