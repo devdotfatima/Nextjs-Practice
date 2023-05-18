@@ -16,6 +16,7 @@ import {
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { useState } from "react";
 import GoogleSignInButton from "../components/GoogleSignInButton";
+import GitSignInButton from "../components/GitSignInButton";
 
 const SignInPage = () => {
   const [email, setEmail] = useState<FormDataEntryValue | null>("");
@@ -101,6 +102,7 @@ const SignInPage = () => {
           OR
         </Typography>
         <GoogleSignInButton />
+        <GitSignInButton />
       </Paper>
     </Box>
   );

@@ -5,14 +5,14 @@ import { signIn } from "next-auth/react";
 
 import { Button } from "@mui/material";
 
-const GoogleSignInButton = () => {
+const GitSignInButton = () => {
   const searchParams = useSearchParams();
   const callbackUrl: any = searchParams.get("callbackUrl");
 
   return (
     <Button
       variant="contained"
-      onClick={() => signIn("google", { callbackUrl })}
+      onClick={() => signIn("github", { callbackUrl })}
       sx={{
         "& svg": {
           width: "1em",
@@ -27,20 +27,20 @@ const GoogleSignInButton = () => {
       <svg
         aria-hidden="true"
         focusable="false"
-        data-icon="google"
+        data-icon="git"
         className="mr-8 w-5"
         role="img"
         xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 488 512"
+        viewBox="0 0 512 512"
       >
         <path
-          fill="red"
-          d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"
+          fill="#F05032"
+          d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 464c-119.103 0-216-96.897-216-216S136.897 40 256 40s216 96.897 216 216-96.897 216-216 216zm64-208h-64v64h-32v-64h-64v-32h64v-64h32v64h64v32z"
         ></path>
       </svg>
-      Continue with Google
+      Continue with GIT
     </Button>
   );
 };
 
-export default GoogleSignInButton;
+export default GitSignInButton;
