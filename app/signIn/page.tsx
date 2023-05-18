@@ -97,7 +97,7 @@ const SignInPage = () => {
           align="center"
           variant="h6"
           color="textSecondary"
-          sx={{ mt: 1, mb: 2 }}
+          sx={{ mt: 0, mb: 1 }}
         >
           OR
         </Typography>
