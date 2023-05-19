@@ -1,19 +1,4 @@
 "use client";
-
-import {
-  TextField,
-  Button,
-  Box,
-  Typography,
-  Divider,
-  Avatar,
-  Checkbox,
-  FormControlLabel,
-  Grid,
-  Link,
-  Paper,
-} from "@mui/material";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { useState } from "react";
 import GoogleSignInButton from "../components/GoogleSignInButton";
 import GitSignInButton from "../components/GitSignInButton";
@@ -34,77 +19,81 @@ const SignInPage = () => {
   };
 
   return (
-    <Box
-      height="100vh"
-      sx={{
-        paddingTop: 8,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-    >
-      <Paper
-        component="form"
-        onSubmit={handleSubmit}
-        elevation={3} // Add elevation for a raised effect
-        sx={{
-          mt: 3,
-          width: "50%", // Adjust the width of the form
-          padding: "1rem", // Add padding inside the form
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
+    <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 dark:bg-white">
+      <div className="bg-indigo-50	 rounded sm:w-1/2 w-full mx-auto   p-5">
+        <div className="sm:mx-auto sm:w-full sm:max-w-sm  ">
+          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+            Sign in to your account
+          </h2>
+        </div>
 
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          id="email"
-          label="Email Address"
-          name="email"
-          autoComplete="email"
-          autoFocus
-          sx={{ width: "75%" }}
-        />
-        <TextField
-          sx={{ width: "75%" }}
-          margin="normal"
-          required
-          fullWidth
-          name="password"
-          label="Password"
-          type="password"
-          id="password"
-          autoComplete="current-password"
-        />
-        <Button
-          type="submit"
-          // fullWidth
-          variant="contained"
-          sx={{ mt: 3, mb: 2, width: "75%" }}
-        >
-          Sign In
-        </Button>
-        <Typography
-          align="center"
-          variant="h6"
-          color="textSecondary"
-          sx={{ mt: 0, mb: 1 }}
-        >
-          OR
-        </Typography>
-        <GoogleSignInButton />
-        <GitSignInButton />
-      </Paper>
-    </Box>
+        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+          <form className="space-y-6" action="#" method="POST">
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Email address
+              </label>
+              <div className="mt-2">
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+            <div>
+              <div className="flex items-center justify-between">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Password
+                </label>
+                <div className="text-sm">
+                  <a
+                    href="#"
+                    className="font-semibold text-indigo-600 hover:text-indigo-500"
+                  >
+                    Forgot password?
+                  </a>
+                </div>
+              </div>
+              <div className="mt-2">
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  autoComplete="current-password"
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+            <div>
+              <button
+                type="submit"
+                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Sign in
+              </button>
+            </div>
+          </form>
+          <h3 className="mt-5 text-lg text-center  font-bold text-gray-500">
+            OR
+          </h3>
+          <GoogleSignInButton />
+          <GitSignInButton />
+        </div>
+      </div>
+    </div>
   );
 };
 

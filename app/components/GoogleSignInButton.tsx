@@ -3,30 +3,17 @@
 import { useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
 
-import { Button } from "@mui/material";
-
 const GoogleSignInButton = () => {
   const searchParams = useSearchParams();
   const callbackUrl: any = searchParams.get("callbackUrl");
 
   return (
-    <Button
-      variant="contained"
+    <button
       onClick={() => signIn("google", { callbackUrl })}
-      sx={{
-        "& svg": {
-          width: "2em",
-          height: "1.5em",
-          marginRight: "8px",
-        },
-        width: "75%",
-        marginTop: 0,
-        marginBottom: 2,
-      }}
+      className="flex w-full mt-5 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
     >
       <svg
-        width="800px"
-        height="800px"
+        className="w-8 h-6 mr-2 "
         viewBox="-0.5 0 48 48"
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
@@ -68,7 +55,7 @@ const GoogleSignInButton = () => {
         </g>
       </svg>
       Continue with Google
-    </Button>
+    </button>
   );
 };
 

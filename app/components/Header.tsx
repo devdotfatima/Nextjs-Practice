@@ -1,204 +1,154 @@
 "use client";
 import { signOut, useSession } from "next-auth/react";
-import MenuIcon from "@mui/icons-material/Menu";
-import AdbIcon from "@mui/icons-material/Adb";
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Button,
-  Avatar,
-  Box,
-  Container,
-  IconButton,
-  Menu,
-  MenuItem,
-  Tooltip,
-} from "@mui/material";
+
 import React from "react";
 
 const Header = () => {
   const { data: session }: any = useSession();
 
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null
-  );
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-    null
-  );
+  const [anchorElNav, setAnchorElNav] = React.useState<boolean>(false);
+  const [anchorElUser, setAnchorElUser] = React.useState<boolean>(false);
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
+  const handleNavMenu = () => {
+    setAnchorElNav(!anchorElNav);
+    if (anchorElUser) {
+      handleUserMenu();
+    }
   };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
+  const handleUserMenu = () => {
+    setAnchorElUser(!anchorElUser);
+    if (anchorElNav) {
+      handleNavMenu();
+    }
   };
   const pages = [
     { name: "Repository CSR", route: "/reposCSR" },
     { name: "Repos SSR", route: "/repos" },
   ];
-  const settings = [
-    {
-      name: "Profile",
-      func: () => {
-        alert("hello");
-      },
-    },
-    {
-      name: "Logout",
-      func: () => {
-        signOut();
-      },
-    },
-  ];
+
   return (
     <>
       {session && (
-        <AppBar position="static">
-          <Container maxWidth="xl">
-            <Toolbar sx={{ pt: 1 }} disableGutters>
-              <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-              <Typography
-                variant="h6"
-                noWrap
-                component="a"
-                href="/"
-                sx={{
-                  mr: 2,
-                  display: { xs: "none", md: "flex" },
-                  fontFamily: "monospace",
-                  fontWeight: 700,
-                  letterSpacing: ".3rem",
-                  color: "inherit",
-                  textDecoration: "none",
-                }}
-              >
-                NEXT JS
-              </Typography>
-
-              <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-                <IconButton
-                  size="large"
-                  aria-label="account of current user"
-                  aria-controls="menu-appbar"
-                  aria-haspopup="true"
-                  onClick={handleOpenNavMenu}
-                  color="inherit"
+        <nav className="bg-gray-800">
+          <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+            <div className="relative flex h-16 items-center justify-between">
+              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                <button
+                  type="button"
+                  onClick={handleNavMenu}
+                  className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                  aria-controls="mobile-menu"
+                  aria-expanded="false"
                 >
-                  <MenuIcon />
-                </IconButton>
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorElNav}
-                  anchorOrigin={{
-                    vertical: "bottom",
-                    horizontal: "left",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "left",
-                  }}
-                  open={Boolean(anchorElNav)}
-                  onClose={handleCloseNavMenu}
-                  sx={{
-                    display: { xs: "block", md: "none" },
-                  }}
-                >
-                  {pages.map((page) => (
-                    <MenuItem key={page.name} onClick={handleCloseNavMenu}>
-                      <Button color="inherit" href={page.route}>
-                        {page.name}
-                      </Button>
-                    </MenuItem>
-                  ))}
-                </Menu>
-              </Box>
-              <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-              <Typography
-                variant="h5"
-                noWrap
-                component="a"
-                href=""
-                sx={{
-                  mr: 2,
-                  display: { xs: "flex", md: "none" },
-                  flexGrow: 1,
-                  fontFamily: "monospace",
-                  fontWeight: 700,
-                  letterSpacing: ".3rem",
-                  color: "inherit",
-                  textDecoration: "none",
-                }}
-              >
-                LOGO
-              </Typography>
-              <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-                {pages.map((page) => (
-                  <Button
-                    key={page.name}
-                    onClick={handleCloseNavMenu}
-                    sx={{ my: 2, color: "white", display: "block" }}
-                    href={page.route}
+                  <span className="sr-only">Open main menu</span>
+                  <svg
+                    className={" h-6 w-6 block"}
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    aria-hidden="true"
                   >
-                    {page.name}
-                  </Button>
-                ))}
-              </Box>
-
-              <Box sx={{ flexGrow: 0 }}>
-                <Tooltip title="Open settings">
-                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Typography
-                      sx={{ pr: 1 }}
-                      variant="h5"
-                      color="white"
-                      textAlign="center"
-                    >
-                      {session.user?.name}
-                    </Typography>
-                    <Avatar
-                      alt={session.user?.name}
-                      src={`${session.user.image}`}
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
                     />
-                  </IconButton>
-                </Tooltip>
-                <Menu
-                  sx={{ mt: "45px" }}
-                  id="menu-appbar"
-                  anchorEl={anchorElUser}
-                  anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  open={Boolean(anchorElUser)}
-                  onClose={handleCloseUserMenu}
+                  </svg>
+                </button>
+              </div>
+              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                <div className="flex flex-shrink-0 items-center">NEXT JS</div>
+                {pages.map((page) => (
+                  <div className="hidden sm:ml-6 sm:block">
+                    <div className="flex space-x-4">
+                      <a
+                        href={page.route}
+                        className=" text-white rounded-md hover:bg-gray-700 px-3 py-2 text-sm font-medium"
+                        aria-current="page"
+                      >
+                        {page.name}
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                <div className="relative ml-3">
+                  <div>
+                    <button
+                      type="button"
+                      className=" rounded-full bg-gray-800 text-sm focus:outline-none my-auto"
+                      id="user-menu-button"
+                      aria-expanded="false"
+                      aria-haspopup="true"
+                      onClick={handleUserMenu}
+                    >
+                      <span className="sr-only">Open user menu</span>
+
+                      <img
+                        className="h-8 w-8 rounded-full mx-auto "
+                        src={`${session.user.image}`}
+                        alt=""
+                      />
+                      <p className="text-center"> {session.user.name}</p>
+                    </button>
+                  </div>
+                  <div
+                    className={
+                      "absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" +
+                      (anchorElUser ? " block" : " hidden")
+                    }
+                    role="menu"
+                    aria-orientation="vertical"
+                    aria-labelledby="user-menu-button"
+                    tabIndex={-1}
+                  >
+                    {/* <!-- Active: "bg-gray-100", Not Active: "" --> */}
+                    <a
+                      href="#"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      role="menuitem"
+                      tabIndex={-1}
+                      id="user-menu-item-0"
+                    >
+                      Your Profile
+                    </a>
+
+                    <a
+                      onClick={() => signOut()}
+                      href="#"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      role="menuitem"
+                      tabIndex={-1}
+                      id="user-menu-item-2"
+                    >
+                      Sign out
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            className={
+              anchorElNav ? "block " + "sm:hidden" : "hidden " + "sm:hidden"
+            }
+            id="mobile-menu"
+          >
+            <div className="space-y-1 px-2 pb-3 pt-2">
+              {pages.map((page) => (
+                <a
+                  href={page.route}
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
                 >
-                  {settings.map((setting) => (
-                    <MenuItem key={setting.name} onClick={handleCloseUserMenu}>
-                      <Typography textAlign="center" onClick={setting.func}>
-                        {setting.name}
-                      </Typography>
-                    </MenuItem>
-                  ))}
-                </Menu>
-              </Box>
-            </Toolbar>
-          </Container>
-        </AppBar>
+                  {page.name}
+                </a>
+              ))}
+            </div>
+          </div>
+        </nav>
       )}
     </>
   );
