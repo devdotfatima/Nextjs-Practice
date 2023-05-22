@@ -32,21 +32,26 @@ const Repository = async () => {
   };
 
   return (
-    <>
+    <div className="min-w-full  ">
       <CourseSearch getSearchResults={getSearchResults} />
 
-      <div className="courses">
+      <div className="flex flex-col dark:bg-white text-black gap-8 items-center pt-10">
         {coursesData.map((course: Repository) => (
-          <div key={course.id} className="card">
-            <h2>{course.name}</h2>
+          <div
+            key={course.id}
+            className="p-3  w-3/4  m-5  border-teal-900 bg-teal-100 rounded  border-2 text-left  sm:w-1/2 text-teal-900"
+          >
+            <h2 className=" font-bold text-lg sm:text-xl">{course.name}</h2>
             <p>{course.description}</p>
-            <Link href={course.html_url} target="_blank" className="btn">
-              Go To Repo
-            </Link>
+            <button className="rounded mt-5 bg-teal-900 text-white p-3">
+              <Link href={course.html_url} target="_blank">
+                Go To Repo
+              </Link>
+            </button>
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 };
 export default Repository;

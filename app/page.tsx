@@ -7,7 +7,7 @@ const HomePage = async () => {
     redirect("/signIn?callbackUrl=/");
   }
 
-  return <div>HomePage</div>;
+  return <div className="min-h-screen dark:bg-white text-black">HomePage</div>;
 };
 
 export default HomePage;
