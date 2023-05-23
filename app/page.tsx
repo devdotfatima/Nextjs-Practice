@@ -1,13 +1,11 @@
-import { redirect } from "next/navigation";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "./api/auth/[...nextauth]/route";
-const HomePage = async () => {
-  const session = await getServerSession(authOptions);
-  if (!session) {
-    redirect("/signIn?callbackUrl=/");
-  }
+import Hero from "./components/Hero";
 
-  return <div className="min-h-screen dark:bg-white text-black">HomePage</div>;
+const HomePage = async () => {
+  return (
+    <div className="min-h-screen dark:bg-white text-black">
+      <Hero />
+    </div>
+  );
 };
 
 export default HomePage;
