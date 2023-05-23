@@ -20,15 +20,40 @@ const Header = () => {
   const pages = [
     { name: "Repository CSR", route: "/reposCSR" },
     { name: "Repos SSR", route: "/repos" },
+    { name: "Testimonial", route: "/repos" },
+    { name: "blog", route: "/repos" },
   ];
 
   return (
     <>
-      <div className="bg-gradient-to-t from-indigo-100 to-green-100 flex flex-row p-3">
-        <div className="w-1/5 sm:w-1/12 justify-between flex flex-row">
+      <div className="bg-gradient-to-t from-indigo-100 to-green-100 flex flex-row p-3 sm:pl-12 sm:pr-12 ">
+        <div className="w-1/5 sm:w-1/12  justify-left  flex flex-row">
           <h3 className="text-indigo-800 font-bold font-sans text-3xl ">O|</h3>
           <h3 className="text-black font-bold font-sans text-3xl">Corp</h3>
         </div>
+
+        <div className="hidden  sm:flex flex-row ml-auto">
+          <div className="space-y-1 px-2 pb-3 pt-2 ">
+            {pages.map((page) => (
+              <a
+                href={page.route}
+                className="text-slate-600 hover:bg-gray-700 hover:text-white  rounded-md px-3 py-2 text-base font-medium"
+              >
+                {page.name}
+              </a>
+            ))}
+          </div>
+          <button
+            type="button"
+            onClick={handleNavMenu}
+            className="bg-purple-700 rounded-full  text-white font-semibold pl-3 pr-3  ml-auto"
+            aria-controls="mobile-menu"
+            aria-expanded="false"
+          >
+            Let's Start
+          </button>
+        </div>
+
         <button
           type="button"
           onClick={handleNavMenu}
