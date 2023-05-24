@@ -4,7 +4,10 @@ export const GetSarted = () => {
   return (
     <div className="  dark:from-gray-800 w-screen pt-20 pb-20 h bg-white dark:bg-slate-700 dark:text-white ">
       <div>
-        <div className="bg-gradient-to-t from-indigo-100 dark:from-gray-800">
+        <div
+          id="getstarted"
+          className="bg-gradient-to-t from-indigo-100 dark:from-gray-800"
+        >
           <div className="mt-10 justify-center flex -space-x-2 overflow-hidden">
             <div className="text-2xl bg-purple-300 dark:bg-gray-500 h-12 w-12 rounded-full text-white font-sans pl-4 pt-1">
               A

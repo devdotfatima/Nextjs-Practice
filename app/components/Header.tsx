@@ -21,10 +21,10 @@ const Header = () => {
     }
   };
   const pages = [
-    { name: "Features", route: "/reposCSR" },
+    { name: "Features", route: "#feature" },
     { name: "Solution", route: "/repos" },
-    { name: "Testimonial", route: "/repos" },
-    { name: "blog", route: "/repos" },
+    { name: "Testimonial", route: "#testimonial" },
+    { name: "blog", route: "#blog" },
   ];
 
   return (
@@ -39,6 +39,7 @@ const Header = () => {
           <div className="space-y-1 px-2 pb-3 pt-2 ">
             {pages.map((page) => (
               <a
+                key={page.name}
                 href={page.route}
                 className="text-slate-600 dark:text-white hover:bg-gray-700 hover:text-white  rounded-md px-3 py-2 text-base font-medium"
               >
@@ -100,6 +101,7 @@ const Header = () => {
         <div className="space-y-1 px-2 pb-3 pt-2 bg-gradient-to-r from-indigo-200 rounded-lg  dark:from-gray-900">
           {pages.map((page) => (
             <a
+              key={page.name}
               href={page.route}
               className="text-slate-600 hover:bg-gray-700 dark:text-white hover:text-white block rounded-md px-3 py-2 text-base font-medium"
             >

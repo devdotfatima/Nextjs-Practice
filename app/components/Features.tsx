@@ -3,7 +3,7 @@ import FeatureCard from "./FeatureCard";
 
 const Features = () => {
   return (
-    <div className="bg-white dark:bg-slate-700 dark:text-white">
+    <div id="feature" className="bg-white dark:bg-slate-700 dark:text-white">
       {" "}
       <div className="m-8  flex flex-col gap-6 h-full  sm:p-10">
         <span className="text-2xl">✨</span>

@@ -3,7 +3,10 @@ import TestimonialCard from "./TestimonialCard";
 
 const Testimonial = () => {
   return (
-    <div className="p-10 mt-5 h-fit w-screen bg-white dark:bg-slate-700 dark:text-white ">
+    <div
+      id="testimonial"
+      className="p-10 mt-5 h-fit w-screen bg-white dark:bg-slate-700 dark:text-white "
+    >
       <h3 className="text-3xl mt-5 font-bold text-center">
         We have some fans.
       </h3>
