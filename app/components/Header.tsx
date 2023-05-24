@@ -1,10 +1,12 @@
 "use client";
 import React, { useEffect } from "react";
+import { useTheme } from "next-themes";
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<boolean>(false);
   const [anchorElUser, setAnchorElUser] = React.useState<boolean>(false);
-  const [myValue, setMyValue] = React.useState<string | null>(null);
+
+  const { theme, setTheme } = useTheme();
 
   const handleNavMenu = () => {
     setAnchorElNav(!anchorElNav);
@@ -55,22 +57,12 @@ const Header = () => {
 
           <button
             type="button"
-            className="bg-purple-700 rounded-full  text-white font-semibold pl-3 pr-3  ml-auto"
+            className="bg-purple-700 rounded-full  text-white font-semibold pl-3 pr-3  ml-2"
             aria-controls="mobile-menu"
             aria-expanded="false"
-            onClick={() => {
-              console.log(myValue); // Output: 'myValue'
-              if (myValue === null) {
-                setMyValue("dark");
-              } else if (myValue === "dark") {
-                setMyValue("");
-              } else {
-                setMyValue("dark");
-              }
-              localStorage.setItem("mode", myValue);
-            }}
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
           >
-            {myValue === "dark" ? "Dark" : "Bright"}
+            {theme === "dark" ? "Dark" : "Bright"}
           </button>
         </div>
 
