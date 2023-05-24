@@ -3,14 +3,14 @@ import React from "react";
 const Hero = () => {
   return (
     <div className=" flex flex-col gap-8">
-      <div className="bg-gradient-to-b from-indigo-100   ">
+      <div className="bg-gradient-to-b from-indigo-100 dark:from-gray-800    ">
         <h1 className="p-4 mt-10 text-4xl font-bold mx-auto font-sans text-center sm:w-1/2 sm:text-5xl ">
           Lorem ipsum dolor sit amet{" "}
           <span className="text-purple-500">Genmataotion.</span>
         </h1>
       </div>
 
-      <p className=" mt-0 sm:w-1/2 sm:text-xl text-gray-700 text-md mx-auto font-sans text-center ">
+      <p className=" mt-0 sm:w-1/2 sm:text-xl text-gray-700 dark:text-gray-200 text-md mx-auto font-sans text-center ">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates
         placeat quae quibusdam temporibus optio delectus iste, aut sunt? Rem
         maxime dolorum qui reiciendis eius porro nisi molestiae laudantium illum

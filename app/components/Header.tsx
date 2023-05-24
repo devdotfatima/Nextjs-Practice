@@ -1,9 +1,10 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<boolean>(false);
   const [anchorElUser, setAnchorElUser] = React.useState<boolean>(false);
+  const [myValue, setMyValue] = React.useState<string | null>(null);
 
   const handleNavMenu = () => {
     setAnchorElNav(!anchorElNav);
@@ -26,7 +27,7 @@ const Header = () => {
 
   return (
     <>
-      <div className="bg-gradient-to-t from-indigo-100 to-green-100 flex flex-row p-3 sm:pl-12 sm:pr-12 ">
+      <div className="bg-gradient-to-t from-indigo-100  dark:from-gray-800 flex flex-row p-3 sm:pl-12 sm:pr-12 ">
         <div className="w-1/5 sm:w-1/12  justify-left  flex flex-row">
           <h3 className="text-indigo-800 font-bold font-sans text-3xl ">O|</h3>
           <h3 className="text-black font-bold font-sans text-3xl">Corp</h3>
@@ -37,7 +38,7 @@ const Header = () => {
             {pages.map((page) => (
               <a
                 href={page.route}
-                className="text-slate-600 hover:bg-gray-700 hover:text-white  rounded-md px-3 py-2 text-base font-medium"
+                className="text-slate-600 dark:text-white hover:bg-gray-700 hover:text-white  rounded-md px-3 py-2 text-base font-medium"
               >
                 {page.name}
               </a>
@@ -45,19 +46,38 @@ const Header = () => {
           </div>
           <button
             type="button"
-            onClick={handleNavMenu}
             className="bg-purple-700 rounded-full  text-white font-semibold pl-3 pr-3  ml-auto"
             aria-controls="mobile-menu"
             aria-expanded="false"
           >
             Let's Start
           </button>
+
+          <button
+            type="button"
+            className="bg-purple-700 rounded-full  text-white font-semibold pl-3 pr-3  ml-auto"
+            aria-controls="mobile-menu"
+            aria-expanded="false"
+            onClick={() => {
+              console.log(myValue); // Output: 'myValue'
+              if (myValue === null) {
+                setMyValue("dark");
+              } else if (myValue === "dark") {
+                setMyValue("");
+              } else {
+                setMyValue("dark");
+              }
+              localStorage.setItem("mode", myValue);
+            }}
+          >
+            {myValue === "dark" ? "Dark" : "Bright"}
+          </button>
         </div>
 
         <button
           type="button"
           onClick={handleNavMenu}
-          className="inline-flex items-center justify-center rounded-md p-2 text-gray-700 hover:bg-gray-700 hover:text-white sm:hidden ml-auto"
+          className="inline-flex items-center dark:text-white justify-center rounded-md p-2 text-gray-700 hover:bg-gray-700 hover:text-white sm:hidden ml-auto"
           aria-controls="mobile-menu"
           aria-expanded="false"
         >
@@ -78,17 +98,18 @@ const Header = () => {
           </svg>
         </button>
       </div>
+
       <div
         className={
           anchorElNav ? "block " + "sm:hidden" : "hidden " + "sm:hidden"
         }
         id="mobile-menu"
       >
-        <div className="space-y-1 px-2 pb-3 pt-2 dark:bg-gradient-to-r from-indigo-200 to-green-200 rounded-lg">
+        <div className="space-y-1 px-2 pb-3 pt-2 bg-gradient-to-r from-indigo-200 rounded-lg  dark:from-gray-900">
           {pages.map((page) => (
             <a
               href={page.route}
-              className="text-slate-600 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+              className="text-slate-600 hover:bg-gray-700 dark:text-white hover:text-white block rounded-md px-3 py-2 text-base font-medium"
             >
               {page.name}
             </a>

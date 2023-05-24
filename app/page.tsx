@@ -4,7 +4,7 @@ import Testimonial from "./components/Testimonial";
 
 const HomePage = async () => {
   return (
-    <div className="min-h-screen dark:bg-white text-black ">
+    <div className="min-h-screen bg-white dark:bg-slate-700 dark:text-white text-black ">
       <Hero />
       <Features />
       <Testimonial />

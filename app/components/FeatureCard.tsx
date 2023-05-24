@@ -7,7 +7,7 @@ type CardProps = {
 };
 const FeatureCard = ({ icon, cardTitle, description, link }: CardProps) => {
   return (
-    <div className="flex flex-col gap-4 p-6 sm:border-l border-b">
+    <div className="dark:bg-gray-300 dark:text-white flex flex-col   gap-4 p-6 sm:border-l border-b">
       <div className="text-5xl mt-7 mb-3">{icon}</div>
       <h3 className="font-bold font-mono text-slate-600 text-xl">
         {cardTitle}

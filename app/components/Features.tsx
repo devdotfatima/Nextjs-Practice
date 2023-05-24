@@ -3,15 +3,15 @@ import FeatureCard from "./FeatureCard";
 
 const Features = () => {
   return (
-    <>
+    <div className="bg-white dark:bg-slate-700 dark:text-white">
       {" "}
       <div className="m-8  flex flex-col gap-6 h-full  sm:p-10">
         <span className="text-2xl">✨</span>
-        <h2 className="text-xl font-bold text-gray-600 sm:text-3xl sm:w-1/2">
+        <h2 className="text-xl font-bold text-gray-600 dark:text-gray-200 sm:text-3xl sm:w-1/2">
           {" "}
           A technology-first approach to payments and finance
         </h2>
-        <p className="text-mono text-lg text-slate-500 font-semibold sm:w-3/4">
+        <p className="text-mono text-lg text-slate-500 dark:text-gray-300  font-semibold sm:w-3/4">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus
           fugit vel aut delectus, ducimus esse iusto repellendus doloremque hic,
           laboriosam dolor unde eos. hic, laboriosam dolor unde eos.
@@ -47,31 +47,36 @@ const Features = () => {
           />
         </div>
       </div>
-      <div className="m-8  flex flex-col sm:flex-row gap-6 h-full  sm:p-10">
+      <div className="m-8  flex flex-col-reverse sm:flex-row gap-6 h-full  sm:p-10">
         <div className=" w-full sm:w-1/2 flex flex-col gap-6 h-full  sm:p-10">
           <span className="text-2xl">🌀</span>
-          <h2 className="text-xl font-bold text-gray-600 sm:text-3xl sm:w-3/4">
+          <h2 className="text-xl font-bold text-gray-600 dark:text-gray-200 sm:text-3xl sm:w-3/4">
             {" "}
             Nuxt development is carried out by passionate developers
           </h2>
-          <p className="text-mono text-lg text-slate-500 font-semibold sm:w-4/2">
+          <p className="text-mono text-lg text-slate-500 dark:text-gray-300 font-semibold sm:w-4/2">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus
             fugit vel aut delectus, ducimus esse iusto repellendus doloremque
             hic, laboriosam dolor unde eos. hic, laboriosam dolor unde eos.
           </p>
           <div className="flex flex-row">
-            <span className="p-3 bg-cyan-100 rounded-full text-2xl">✉</span>
+            <span className="p-3 bg-cyan-100 rounded-full text-2xl ">✉</span>
             <div className="flex flex-col ml-3">
-              <h3 className="font-bold text-slate-600">Chat Anytime</h3>
-              <p className="font-mono text-slate-400">
+              <h3 className="font-bold text-slate-600 dark:text-gray-300">
+                Chat Anytime
+              </h3>
+              <p className="font-mono text-slate-400 dark:text-gray-400">
                 Lorem ipsum dolor sit, amet elit.
               </p>
             </div>
           </div>
+          <hr />
           <div className="flex flex-row">
             <span className="p-3 bg-cyan-100 rounded-full text-2xl">🗺</span>
             <div className="flex flex-col ml-3">
-              <h3 className="font-bold text-slate-600">Real Time Location</h3>
+              <h3 className="font-bold text-slate-600 dark:text-gray-300">
+                Real Time Location
+              </h3>
               <p className="font-mono text-slate-400">
                 Lorem ipsum dolor sit, amet elit.
               </p>
@@ -131,7 +136,7 @@ const Features = () => {
           />
         </svg>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -1,7 +1,40 @@
 import React from "react";
+import TestimonialCard from "./TestimonialCard";
 
 const Testimonial = () => {
-  return <div>Testimonial</div>;
+  return (
+    <div className="p-10 mt-5 h-screen w-screen bg-white dark:bg-slate-700 dark:text-white ">
+      <h3 className="text-3xl mt-5 font-bold text-center">
+        We have some fans.
+      </h3>
+      <div className=" flex flex-col sm:flex-row justify-center gap-5 pl-10 pr-10 mt-20 ">
+        <TestimonialCard
+          avatar="A"
+          job="Mobile Developer"
+          name="Dot Dot"
+          review="
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam quam officia necessitatibus voluptas unde ad sequi magnam ut, a autem. 
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam quam officia necessitatibus voluptas unde ad sequi magnam ut, a autem."
+        />
+        <TestimonialCard
+          avatar="A"
+          job="Mobile Developer"
+          name="Dot Dot"
+          review="
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam quam officia necessitatibus voluptas unde ad sequi magnam ut, a autem. 
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam quam officia necessitatibus voluptas unde ad sequi magnam ut, a autem."
+        />
+        <TestimonialCard
+          avatar="A"
+          job="Mobile Developer"
+          name="Dot Dot"
+          review="
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam quam officia necessitatibus voluptas unde ad sequi magnam ut, a autem. 
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam quam officia necessitatibus voluptas unde ad sequi magnam ut, a autem."
+        />
+      </div>
+    </div>
+  );
 };
 
 export default Testimonial;
