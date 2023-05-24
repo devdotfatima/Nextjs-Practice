@@ -21,8 +21,8 @@ const Header = () => {
     }
   };
   const pages = [
-    { name: "Repository CSR", route: "/reposCSR" },
-    { name: "Repos SSR", route: "/repos" },
+    { name: "Features", route: "/reposCSR" },
+    { name: "Solution", route: "/repos" },
     { name: "Testimonial", route: "/repos" },
     { name: "blog", route: "/repos" },
   ];
@@ -35,7 +35,7 @@ const Header = () => {
           <h3 className="text-black font-bold font-sans text-3xl">Corp</h3>
         </div>
 
-        <div className="hidden  sm:flex flex-row ml-auto">
+        <div className="hidden   md:flex flex-row ml-auto">
           <div className="space-y-1 px-2 pb-3 pt-2 ">
             {pages.map((page) => (
               <a
@@ -69,7 +69,7 @@ const Header = () => {
         <button
           type="button"
           onClick={handleNavMenu}
-          className="inline-flex items-center dark:text-white justify-center rounded-md p-2 text-gray-700 hover:bg-gray-700 hover:text-white sm:hidden ml-auto"
+          className="inline-flex items-center dark:text-white justify-center rounded-md p-2 text-gray-700 hover:bg-gray-700 hover:text-white md:hidden ml-auto"
           aria-controls="mobile-menu"
           aria-expanded="false"
         >
@@ -93,7 +93,7 @@ const Header = () => {
 
       <div
         className={
-          anchorElNav ? "block " + "sm:hidden" : "hidden " + "sm:hidden"
+          anchorElNav ? "block " + "md:hidden" : "hidden " + "md:hidden"
         }
         id="mobile-menu"
       >
@@ -106,6 +106,13 @@ const Header = () => {
               {page.name}
             </a>
           ))}
+          <a
+            href=""
+            className="text-slate-600 hover:bg-gray-700 dark:text-white hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          >
+            {theme === "dark" ? "Dark" : "Bright"}
+          </a>
         </div>
       </div>
     </>

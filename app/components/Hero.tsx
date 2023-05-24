@@ -4,7 +4,7 @@ const Hero = () => {
   return (
     <div className=" flex flex-col gap-8">
       <div className="bg-gradient-to-b from-indigo-100 dark:from-gray-800    ">
-        <h1 className="p-4 mt-10 text-4xl font-bold mx-auto font-sans text-center sm:w-1/2 sm:text-5xl ">
+        <h1 className="p-4 mt-10 text-4xl font-bold mx-auto font-sans text-center md:w-1/2 md:text-5xl ">
           Lorem ipsum dolor sit amet{" "}
           <span className="text-purple-500">Genmataotion.</span>
         </h1>
@@ -24,9 +24,8 @@ const Hero = () => {
           Learn More
         </button>
       </div>
-      <div className="flex flex-wrap justify-between m-6 ml-10 mr-10 sm:p-10 ">
+      <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-6 ml-10 mr-10 ">
         <svg
-          className="w-1/3  ml-auto sm:ml-0  sm:w-1/12"
           viewBox="0 -201 512 512"
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
@@ -78,7 +77,7 @@ const Hero = () => {
         </svg>
 
         <svg
-          className="w-1/3 p-7 ml-auto sm:p-3 sm:ml-0  sm:w-1/12"
+          className=" p-7 ml-auto  "
           viewBox="-10 0 276 276"
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
@@ -106,7 +105,7 @@ const Hero = () => {
         </svg>
 
         <svg
-          className="w-1/3 p-5 sm:p-2 sm:w-1/12"
+          className=" p-5 "
           viewBox="0 -51.5 256 256"
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
@@ -141,7 +140,7 @@ const Hero = () => {
         </svg>
 
         <svg
-          className="w-1/3 p-5 sm:p-0 sm:w-1/12"
+          className="  p-5   "
           viewBox="0 -172 512 512"
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
@@ -199,7 +198,7 @@ const Hero = () => {
         </svg>
 
         <svg
-          className="w-1/3 p-5 sm:p-0 sm:w-1/12"
+          className="  p-5   "
           viewBox="0 -187 512 512"
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
@@ -228,7 +227,7 @@ const Hero = () => {
         </svg>
 
         <svg
-          className="w-1/3 p-5 sm:p-0 sm:w-1/12"
+          className="  p-5   "
           viewBox="0 -153.5 512 512"
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"

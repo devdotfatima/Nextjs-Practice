@@ -7,7 +7,7 @@ type CardProps = {
 };
 const TestimonialCard = ({ avatar, name, job, review }: CardProps) => {
   return (
-    <div className="flex flex-col gap-4 p-6 w-full sm:w-1/3 bg-white dark:bg-gray-300 dark:text-white  border-solid border-2 rounded-2xl">
+    <div className="flex flex-col gap-4 p-6 w-full sm:w-full bg-white dark:bg-gray-300 dark:text-white  border-solid border-2 rounded-2xl">
       <div className=" flex flex-row gap-5">
         <div className="text-2xl bg-purple-300 dark:bg-gray-500 h-12 w-12 rounded-full text-white font-sans pl-4 pt-1">
           {avatar}

@@ -16,7 +16,8 @@ const Features = () => {
           fugit vel aut delectus, ducimus esse iusto repellendus doloremque hic,
           laboriosam dolor unde eos. hic, laboriosam dolor unde eos.
         </p>
-        <div className=" flex flex-col sm:flex-row border-gray-200 border-2 rounded-3xl ">
+
+        <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 border-gray-200 border-2 rounded-3xl ">
           <FeatureCard
             icon="⏰"
             cardTitle="First Feature"
@@ -48,7 +49,7 @@ const Features = () => {
         </div>
       </div>
       <div className="m-8  flex flex-col-reverse sm:flex-row gap-6 h-full  sm:p-10">
-        <div className=" w-full sm:w-1/2 flex flex-col gap-6 h-full  sm:p-10">
+        <div className=" w-full sm:w-3/4 md:w-1/2 flex flex-col gap-6 h-full  ">
           <span className="text-2xl">🌀</span>
           <h2 className="text-xl font-bold text-gray-600 dark:text-gray-200 sm:text-3xl sm:w-3/4">
             {" "}
@@ -85,7 +86,7 @@ const Features = () => {
         </div>
 
         <svg
-          className=" w-full sm:w-1/2"
+          className=" w-full sm:w-1/4 mb-auto mt-20 md:w-1/2 "
           viewBox="0 0 456 402"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"

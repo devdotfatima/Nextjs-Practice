@@ -1,4 +1,6 @@
+import Blog from "./components/Blog";
 import Features from "./components/Features";
+import { GetSarted } from "./components/GetSarted";
 import Hero from "./components/Hero";
 import Testimonial from "./components/Testimonial";
 
@@ -8,6 +10,8 @@ const HomePage = async () => {
       <Hero />
       <Features />
       <Testimonial />
+      <GetSarted />
+      <Blog />
     </div>
   );
 };
