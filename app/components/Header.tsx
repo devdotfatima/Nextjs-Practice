@@ -4,8 +4,17 @@ import { useTheme } from "next-themes";
 import Link from "next/link";
 
 const Header = () => {
+  const [hydrated, setHydrated] = React.useState(false);
+
   const [anchorElNav, setAnchorElNav] = React.useState<boolean>(false);
   const [anchorElUser, setAnchorElUser] = React.useState<boolean>(false);
+  React.useEffect(() => {
+    setHydrated(true);
+  }, []);
+  if (!hydrated) {
+    // Returns null on first render, so the client and server match
+    return null;
+  }
 
   const { theme, setTheme } = useTheme();
 
@@ -32,8 +41,14 @@ const Header = () => {
     <>
       <div className="bg-gradient-to-t from-indigo-100  dark:from-gray-800 flex flex-row p-3 sm:pl-12 sm:pr-12 ">
         <div className="w-1/5 sm:w-1/12  justify-left  flex flex-row">
-          <h3 className="text-indigo-800 font-bold font-sans text-3xl ">O|</h3>
-          <h3 className="text-black font-bold font-sans text-3xl">Corp</h3>
+          <Link href={"/"}>
+            <h3 className="text-indigo-800 font-bold font-sans text-3xl ">
+              O|
+            </h3>
+          </Link>
+          <Link href={"/"}>
+            <h3 className="text-black font-bold font-sans text-3xl">Corp</h3>
+          </Link>
         </div>
 
         <div className="hidden   md:flex flex-row ml-auto">
