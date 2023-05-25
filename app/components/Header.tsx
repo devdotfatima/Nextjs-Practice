@@ -53,7 +53,7 @@ const Header = () => {
             aria-controls="mobile-menu"
             aria-expanded="false"
           >
-            Let's Start
+            Let&apos;s Start
           </button>
 
           <button

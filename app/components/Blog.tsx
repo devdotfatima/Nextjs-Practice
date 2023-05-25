@@ -9,7 +9,7 @@ const Blog = () => {
     >
       <h3 className="text-3xl mt-5 font-bold text-center">Latest Articles</h3>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 md:pl-10 md:pr-10 mt-20">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 lg:pl-10 lg:pr-10 mt-20">
         <BlogCard
           image="article1.jpg"
           title="Mobile Dev"
