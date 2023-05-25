@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
 import { useTheme } from "next-themes";
+import Link from "next/link";
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<boolean>(false);
@@ -53,7 +54,7 @@ const Header = () => {
             aria-controls="mobile-menu"
             aria-expanded="false"
           >
-            Let&apos;s Start
+            <Link href={"/signIn"}>Let&apos;s Start</Link>
           </button>
 
           <button
