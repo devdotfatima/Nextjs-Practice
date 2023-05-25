@@ -10,7 +10,7 @@ const Testimonial = () => {
       <h3 className="text-3xl mt-5 font-bold text-center">
         We have some fans.
       </h3>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 pl-10 pr-10 mt-20">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 md:pl-10 md:pr-10 mt-20">
         <TestimonialCard
           avatar="A"
           job="Mobile Developer"

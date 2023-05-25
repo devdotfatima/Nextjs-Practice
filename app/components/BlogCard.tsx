@@ -9,17 +9,17 @@ type CardProps = {
 };
 const BlogCard = ({ image, title, desc, link }: CardProps) => {
   return (
-    <div className="flex flex-col gap-4 p-6 w-full  sm:w-full bg-white dark:bg-gray-300 dark:text-white  border-solid border-2 rounded-2xl">
-      <div className="text-2xl h-48 w-full rounded text-white font-sans ">
+    <div className="flex flex-col gap-2 sm:gap-4 p-4 sm:p-6 w-full  sm:w-full bg-white dark:bg-gray-300 dark:text-white  border-solid border-2 rounded-2xl">
+      <div className="h-3/4 w-5/4 rounded  ">
         <Image
-          src={`${image}+.png?text=${title}`}
+          src={`/${image}`}
           alt="Picture of the author"
           width={500}
           height={500}
         />
       </div>
 
-      <h3 className="font-bold font-mono text-slate-600 mt-12 sm:mt-0  dark:text-gray-600 text-lg">
+      <h3 className="font-bold font-mono text-slate-600 mt-3 sm:mt-3 dark:text-gray-600 text-lg">
         {title}
       </h3>
 
