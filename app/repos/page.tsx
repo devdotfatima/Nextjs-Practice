@@ -1,8 +1,5 @@
 import Link from "next/link";
 import { FaStar, FaCodeBranch, FaEye } from "react-icons/fa";
-import { redirect } from "next/navigation";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "../api/auth/[...nextauth]/route";
 import { Repository } from "@/utils/interfaceTypes";
 
 async function fetchRepos() {
