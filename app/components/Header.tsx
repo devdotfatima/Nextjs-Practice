@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 
 const Header = () => {
   const { data: session } = useSession();
@@ -65,27 +65,116 @@ const Header = () => {
               </a>
             ))}
           </div>
-          <button
-            type="button"
-            className="bg-purple-700 rounded-full  text-white font-semibold pl-4 pr-4  ml-auto"
-            aria-controls="mobile-menu"
-            aria-expanded="false"
-          >
-            {session ? (
-              session?.user?.name[0]
-            ) : (
+          {!session && (
+            <button
+              type="button"
+              className="bg-purple-700 rounded-full  text-white font-semibold pl-4 pr-4  ml-auto"
+              aria-controls="mobile-menu"
+              aria-expanded="false"
+            >
               <Link href={"/signIn?callbackUrl=/"}>Let&apos;s Start</Link>
-            )}
-          </button>
+            </button>
+          )}
+
+          {session && (
+            <div className="abslute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+              <div className="relative ">
+                <div>
+                  <button
+                    type="button"
+                    className=" rounded-full  text-sm focus:outline-none my-auto"
+                    id="user-menu-button"
+                    aria-expanded="false"
+                    aria-haspopup="true"
+                    onClick={handleUserMenu}
+                  >
+                    <span className="sr-only">Open user menu</span>
+
+                    <img
+                      className="h-8 w-8 rounded-full mx-auto "
+                      src={`${session?.user?.image}`}
+                      alt=""
+                    />
+                    <p className="text-center text-gray-700 dark:text-gray-200">
+                      {" "}
+                      {session?.user?.name}
+                    </p>
+                  </button>
+                </div>
+                <div
+                  className={
+                    "absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" +
+                    (anchorElUser ? " block" : " hidden")
+                  }
+                  role="menu"
+                  aria-orientation="vertical"
+                  aria-labelledby="user-menu-button"
+                  tabIndex={-1}
+                >
+                  {/* <!-- Active: "bg-gray-100", Not Active: "" --> */}
+                  <a
+                    href="#"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    role="menuitem"
+                    tabIndex={-1}
+                    id="user-menu-item-0"
+                  >
+                    Your Profile
+                  </a>
+
+                  <a
+                    onClick={() => signOut()}
+                    href="#"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    role="menuitem"
+                    tabIndex={-1}
+                    id="user-menu-item-2"
+                  >
+                    Sign out
+                  </a>
+                </div>
+              </div>
+            </div>
+          )}
 
           <button
             type="button"
-            className="bg-purple-700 rounded-full  text-white font-semibold pl-3 pr-3  ml-2"
+            className="  text-white dark:text-black  pl-3 pr-3  ml-2"
             aria-controls="mobile-menu"
             aria-expanded="false"
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
           >
-            {theme === "dark" ? "Dark" : "Bright"}
+            {theme === "dark" ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6 text-white"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
+                />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6 text-black"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"
+                />
+              </svg>
+            )}
           </button>
         </div>
 
