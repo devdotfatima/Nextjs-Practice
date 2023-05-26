@@ -7,6 +7,8 @@ const GoogleSignInButton = () => {
   const searchParams = useSearchParams();
   let callbackUrl: any = searchParams.get("callbackUrl");
   if (callbackUrl === "") {
+    // redirect("/signIn?callbackUrl=/");
+
     callbackUrl = "/";
   }
 
@@ -27,7 +29,7 @@ const GoogleSignInButton = () => {
         <g
           id="Icons"
           stroke="none"
-          stroke-width="1"
+          strokeWidth="1"
           fill="none"
           fillRule="evenodd"
         >

@@ -2,21 +2,23 @@
 import React, { useEffect } from "react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 const Header = () => {
+  const { data: session } = useSession();
   const [hydrated, setHydrated] = React.useState(false);
 
   const [anchorElNav, setAnchorElNav] = React.useState<boolean>(false);
   const [anchorElUser, setAnchorElUser] = React.useState<boolean>(false);
-  React.useEffect(() => {
+
+  const { theme, setTheme } = useTheme();
+  useEffect(() => {
     setHydrated(true);
   }, []);
   if (!hydrated) {
     // Returns null on first render, so the client and server match
     return null;
   }
-
-  const { theme, setTheme } = useTheme();
 
   const handleNavMenu = () => {
     setAnchorElNav(!anchorElNav);
@@ -65,11 +67,15 @@ const Header = () => {
           </div>
           <button
             type="button"
-            className="bg-purple-700 rounded-full  text-white font-semibold pl-3 pr-3  ml-auto"
+            className="bg-purple-700 rounded-full  text-white font-semibold pl-4 pr-4  ml-auto"
             aria-controls="mobile-menu"
             aria-expanded="false"
           >
-            <Link href={"/signIn"}>Let&apos;s Start</Link>
+            {session ? (
+              session?.user?.name[0]
+            ) : (
+              <Link href={"/signIn?callbackUrl=/"}>Let&apos;s Start</Link>
+            )}
           </button>
 
           <button
