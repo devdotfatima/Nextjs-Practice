@@ -92,7 +92,7 @@ const Header = () => {
 
                     <img
                       className="h-8 w-8 rounded-full mx-auto "
-                      src={`${session?.user?.image}`}
+                      src={session?.user?.image}
                       alt=""
                     />
                     <p className="text-center text-gray-700 dark:text-gray-200">

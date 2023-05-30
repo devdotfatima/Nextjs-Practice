@@ -4,7 +4,7 @@ import { GetSarted } from "./components/GetSarted";
 import Hero from "./components/Hero";
 import Testimonial from "./components/Testimonial";
 
-const HomePage = async () => {
+const HomePage = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-slate-700 dark:text-white text-black ">
       <Hero />
