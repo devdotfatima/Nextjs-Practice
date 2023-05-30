@@ -20,7 +20,7 @@ const SignInPage = () => {
 
   return (
     <div className="flex min-h-full bg-slate-50 dark:bg-slate-700 dark:text-white flex-col justify-center px-6 py-12 lg:px-8 ">
-      <div className="bg-indigo-50 dark:bg-slate-600	 rounded sm:w-1/2 w-full mx-auto   p-5">
+      <div className="bg-indigo-50 dark:bg-slate-600/100	 rounded sm:w-1/2 w-full mx-auto   p-5 pb-10">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm  ">
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Sign in to your account
