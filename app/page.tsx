@@ -3,6 +3,7 @@ import Features from "./components/Features";
 import { GetSarted } from "./components/GetSarted";
 import Hero from "./components/Hero";
 import Testimonial from "./components/Testimonial";
+import ReposPage from "./repos/page";
 
 const HomePage = () => {
   return (
@@ -12,6 +13,7 @@ const HomePage = () => {
       <Testimonial />
       <GetSarted />
       <Blog />
+      <ReposPage />
     </div>
   );
 };

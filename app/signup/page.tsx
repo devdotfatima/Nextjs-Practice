@@ -1,19 +1,60 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import GoogleSignInButton from "../components/GoogleSignInButton";
 import GitSignInButton from "../components/GitSignInButton";
 
-const SignInPage = () => {
+const SignUpPage = () => {
   const searchParams = useSearchParams();
   const [name, setName] = useState<FormDataEntryValue | string>("");
   const [email, setEmail] = useState<FormDataEntryValue | string>("");
   const [password, setPassword] = useState<FormDataEntryValue | string>("");
+  const [hydrated, setHydrated] = useState(false);
+  const callbackUrl: any = searchParams.get("callbackUrl");
   const router = useRouter();
 
-  const [hydrated, setHydrated] = useState(false);
+  const handleSubmit = useCallback(
+    async (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      const data = { email: email, password: password, name: name };
+      const JSONdata = JSON.stringify(data);
+      const endpoint = "/api/register";
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSONdata,
+      };
+      try {
+        const response = await fetch(endpoint, options);
+        if (!response.ok) {
+          alert("This email already exists");
+          return;
+        }
+        const result = await response.json();
+
+        signIn("credentials", {
+          ...data,
+          redirect: false,
+        }).then((callback) => {
+          if (callback?.error) {
+            alert(callback.error);
+          }
+
+          if (callback?.url) {
+            router.refresh();
+            router.push(callbackUrl);
+          }
+        });
+      } catch (err) {
+        alert(JSON.stringify(err));
+      }
+    },
+    [email, password, name, router, signIn]
+  );
   useEffect(() => {
     setHydrated(true);
   }, []);
@@ -21,54 +62,6 @@ const SignInPage = () => {
     // Returns null on first render, so the client and server match
     return null;
   }
-
-  const callbackUrl: any = searchParams.get("callbackUrl");
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault;
-    const data = { email: email, password: password, name: name };
-    // Send the data to the server in JSON format.
-    const JSONdata = JSON.stringify(data);
-
-    // API endpoint where we send form data.
-    const endpoint = "/api/register";
-
-    // Form the request for sending data to the server.
-    const options = {
-      // The method is POST because we are sending data.
-      method: "POST",
-      // Tell the server we're sending JSON.
-      headers: {
-        "Content-Type": "application/json",
-      },
-      // Body of the request is the JSON data we created above.
-      body: JSONdata,
-    };
-
-    // Send the form data to our forms API on Vercel and get a response.
-    const response = await fetch(endpoint, options);
-    if (!response.ok) {
-      alert("This email already exists");
-      return;
-    }
-    // Get the response data from server as JSON.
-    // If server returns the name submitted, that means the form works.
-    const result = await response.json();
-
-    signIn("credentials", {
-      ...data,
-      redirect: false,
-      //   callbackUrl: callbackUrl,
-    }).then((callback) => {
-      if (callback?.error) {
-        alert(callback.error);
-      }
-
-      if (callback?.url) {
-        router.refresh();
-        router.push(callbackUrl);
-      }
-    });
-  };
 
   return (
     <div className="flex min-h-full bg-slate-50 dark:bg-slate-700 dark:text-white flex-col justify-center px-6 py-12 lg:px-8 ">
@@ -179,4 +172,4 @@ const SignInPage = () => {
   );
 };
 
-export default SignInPage;
+export default SignUpPage;

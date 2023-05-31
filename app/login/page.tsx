@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { redirect, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import GoogleSignInButton from "../components/GoogleSignInButton";
@@ -12,38 +12,50 @@ const SignInPage = () => {
   const [email, setEmail] = useState<FormDataEntryValue | string>("");
   const [password, setPassword] = useState<FormDataEntryValue | string>("");
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault;
-    const data = { email: email, password: password };
+  const handleSubmit = useCallback(
+    async (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
 
-    const callbackUrl: any = searchParams.get("callbackUrl");
-    signIn("credentials", {
-      ...data,
-      redirect: false,
-      //   callbackUrl: callbackUrl,
-    }).then((callback) => {
-      if (callback?.error) {
-        alert(callback.error);
-      }
+      const data = { email: email, password: password };
+      const callbackUrl: any = searchParams.get("callbackUrl");
+      signIn("credentials", {
+        ...data,
+        redirect: false,
+        //   callbackUrl: callbackUrl,
+      })
+        .then((callback) => {
+          if (callback?.error) {
+            alert(callback.error);
+          }
 
-      if (callback?.url) {
-        router.refresh();
-        router.push(callbackUrl);
-      }
-    });
-  };
+          if (callback?.url) {
+            router.refresh();
+            router.push(callbackUrl);
+          }
+        })
+        .catch((error) => {
+          alert(error);
+        });
+    },
+    [email, password, searchParams, signIn, router]
+  );
 
   return (
     <div className="flex min-h-full bg-slate-50 dark:bg-slate-700 dark:text-white flex-col justify-center px-6 py-12 lg:px-8 ">
       <div className="bg-indigo-50 dark:bg-slate-600/100	 rounded sm:w-1/2 w-full mx-auto   p-5 pb-10">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm  ">
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Create Account
+            Login to your account
           </h2>
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" onSubmit={handleSubmit} method="POST">
+          <form
+            className="space-y-6"
+            action=""
+            method="POST"
+            onSubmit={handleSubmit}
+          >
             <div>
               <label
                 htmlFor="email"
