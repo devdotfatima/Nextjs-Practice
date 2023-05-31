@@ -1,59 +1,22 @@
 "use client";
-import { useState, useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { signIn } from "next-auth/react";
-import Link from "next/link";
+import { useState } from "react";
+import { redirect, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import GoogleSignInButton from "../components/GoogleSignInButton";
 import GitSignInButton from "../components/GitSignInButton";
+import { signIn } from "next-auth/react";
 
 const SignInPage = () => {
   const searchParams = useSearchParams();
-  const [name, setName] = useState<FormDataEntryValue | string>("");
+  const router = useRouter();
   const [email, setEmail] = useState<FormDataEntryValue | string>("");
   const [password, setPassword] = useState<FormDataEntryValue | string>("");
-  const router = useRouter();
 
-  const [hydrated, setHydrated] = useState(false);
-  useEffect(() => {
-    setHydrated(true);
-  }, []);
-  if (!hydrated) {
-    // Returns null on first render, so the client and server match
-    return null;
-  }
-
-  const callbackUrl: any = searchParams.get("callbackUrl");
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault;
-    const data = { email: email, password: password, name: name };
-    // Send the data to the server in JSON format.
-    const JSONdata = JSON.stringify(data);
+    const data = { email: email, password: password };
 
-    // API endpoint where we send form data.
-    const endpoint = "/api/register";
-
-    // Form the request for sending data to the server.
-    const options = {
-      // The method is POST because we are sending data.
-      method: "POST",
-      // Tell the server we're sending JSON.
-      headers: {
-        "Content-Type": "application/json",
-      },
-      // Body of the request is the JSON data we created above.
-      body: JSONdata,
-    };
-
-    // Send the form data to our forms API on Vercel and get a response.
-    const response = await fetch(endpoint, options);
-    if (!response.ok) {
-      alert("This email already exists");
-      return;
-    }
-    // Get the response data from server as JSON.
-    // If server returns the name submitted, that means the form works.
-    const result = await response.json();
-
+    const callbackUrl: any = searchParams.get("callbackUrl");
     signIn("credentials", {
       ...data,
       redirect: false,
@@ -81,27 +44,6 @@ const SignInPage = () => {
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form className="space-y-6" onSubmit={handleSubmit} method="POST">
-            <div>
-              <label
-                htmlFor="name"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Name
-              </label>
-              <div className="mt-2">
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  autoComplete="name"
-                  onChange={(e) => {
-                    setName(e.currentTarget.value);
-                  }}
-                  required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
             <div>
               <label
                 htmlFor="email"
@@ -132,6 +74,14 @@ const SignInPage = () => {
                 >
                   Password
                 </label>
+                <div className="text-sm">
+                  <a
+                    href="#"
+                    className="font-semibold text-indigo-600 dark:text-indigo-500 hover:text-indigo-500"
+                  >
+                    Forgot password?
+                  </a>
+                </div>
               </div>
               <div className="mt-2">
                 <input
@@ -153,7 +103,7 @@ const SignInPage = () => {
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Sign up
+                Login
               </button>
             </div>
           </form>
@@ -162,17 +112,6 @@ const SignInPage = () => {
           </h3>
           <GoogleSignInButton />
           <GitSignInButton />
-          <div className="text-sm">
-            <a
-              href="#"
-              className="font-semibold text-indigo-600 dark:text-indigo-500 hover:text-indigo-500"
-            >
-              Alredy have an account?{" "}
-              <span className="font-bold text-indigo-800 dark:text-white ">
-                <Link href={"/login?callbackUrl=" + callbackUrl}> Login.</Link>
-              </span>
-            </a>
-          </div>
         </div>
       </div>
     </div>

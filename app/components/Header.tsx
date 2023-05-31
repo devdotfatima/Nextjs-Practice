@@ -3,9 +3,13 @@ import React, { useEffect } from "react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
+import { SafeUser } from "@/utils/interfaceTypes";
 
-const Header = () => {
-  const { data: session } = useSession();
+interface HeaderProps {
+  currentUser?: SafeUser | null;
+}
+
+const Header: React.FC<HeaderProps> = ({ currentUser }) => {
   const [hydrated, setHydrated] = React.useState(false);
 
   const [anchorElNav, setAnchorElNav] = React.useState<boolean>(false);
@@ -65,7 +69,7 @@ const Header = () => {
               </a>
             ))}
           </div>
-          {!session && (
+          {!currentUser && (
             <button
               type="button"
               className="bg-purple-700 rounded-full  text-white font-semibold pl-4 pr-4  ml-auto"
@@ -76,7 +80,7 @@ const Header = () => {
             </button>
           )}
 
-          {session && (
+          {currentUser && (
             <div className="abslute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
               <div className="relative ">
                 <div>
@@ -92,12 +96,16 @@ const Header = () => {
 
                     <img
                       className="h-8 w-8 rounded-full mx-auto "
-                      src={session?.user?.image}
+                      src={
+                        currentUser.image
+                          ? currentUser?.image
+                          : "/placeholder.jpg"
+                      }
                       alt=""
                     />
                     <p className="text-center text-gray-700 dark:text-gray-200">
                       {" "}
-                      {session?.user?.name}
+                      {currentUser?.name}
                     </p>
                   </button>
                 </div>
