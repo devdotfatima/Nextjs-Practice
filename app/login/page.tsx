@@ -5,11 +5,13 @@ import { useRouter } from "next/navigation";
 import GoogleSignInButton from "../components/GoogleSignInButton";
 import GitSignInButton from "../components/GitSignInButton";
 import { signIn } from "next-auth/react";
+import { toast } from "react-hot-toast";
 
 const SignInPage = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [email, setEmail] = useState<FormDataEntryValue | string>("");
+  const [isLoading, setIsLoading] = useState(false);
   const [password, setPassword] = useState<FormDataEntryValue | string>("");
 
   const handleSubmit = useCallback(
@@ -18,14 +20,14 @@ const SignInPage = () => {
 
       const data = { email: email, password: password };
       const callbackUrl: any = searchParams.get("callbackUrl");
+      setIsLoading(true);
       signIn("credentials", {
         ...data,
         redirect: false,
-        //   callbackUrl: callbackUrl,
       })
         .then((callback) => {
           if (callback?.error) {
-            alert(callback.error);
+            toast.error(callback.error);
           }
 
           if (callback?.url) {
@@ -34,10 +36,13 @@ const SignInPage = () => {
           }
         })
         .catch((error) => {
-          alert(error);
+          toast.error(error);
+        })
+        .finally(() => {
+          setIsLoading(false);
         });
     },
-    [email, password, searchParams, signIn, router]
+    [email, password, searchParams, router]
   );
 
   return (
@@ -113,9 +118,10 @@ const SignInPage = () => {
             <div>
               <button
                 type="submit"
+                disabled={isLoading}
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Login
+                {isLoading ? "loading" : " Login"}
               </button>
             </div>
           </form>
