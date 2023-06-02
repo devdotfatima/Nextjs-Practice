@@ -2,8 +2,9 @@
 import React, { useEffect } from "react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
-import { useSession, signOut } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import { SafeUser } from "@/utils/interfaceTypes";
+import Image from "next/image";
 
 interface HeaderProps {
   currentUser?: SafeUser | null;
@@ -94,14 +95,16 @@ const Header: React.FC<HeaderProps> = ({ currentUser }) => {
                   >
                     <span className="sr-only">Open user menu</span>
 
-                    <img
+                    <Image
                       className="h-8 w-8 rounded-full mx-auto "
+                      width={100}
+                      height={100}
                       src={
                         currentUser.image
                           ? currentUser?.image
                           : "/placeholder.jpg"
                       }
-                      alt=""
+                      alt={currentUser?.name ? currentUser?.name : "user"}
                     />
                     <p className="text-center text-gray-700 dark:text-gray-200">
                       {" "}
