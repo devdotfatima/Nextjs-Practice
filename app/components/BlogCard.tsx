@@ -10,7 +10,7 @@ type CardProps = {
 const BlogCard = ({ image, title, desc, link }: CardProps) => {
   return (
     <div className="flex flex-col gap-2 sm:gap-4 p-4 sm:p-6 w-full  sm:w-full bg-white dark:bg-gray-300 dark:text-white  border-solid border-2 rounded-2xl ">
-      <img src={`/${image}`} className="h-3/4 w-5/4 rounded  " />
+      <img src={`/${image}`} alt={title} className="h-3/4 w-5/4 rounded " />
 
       <h3 className="font-bold font-mono text-slate-600 mt-3 sm:mt-3 dark:text-gray-600 text-lg">
         {title}
