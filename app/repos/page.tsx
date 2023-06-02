@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { FaStar, FaCodeBranch, FaEye } from "react-icons/fa";
 import { Repository } from "@/utils/interfaceTypes";
 
 async function fetchRepos(): Promise<Repository[]> {
