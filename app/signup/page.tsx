@@ -3,21 +3,28 @@ import { useState, useEffect, useCallback } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
+import { toast } from "react-hot-toast";
+import { useMutation } from "@tanstack/react-query";
 import GoogleSignInButton from "../components/GoogleSignInButton";
 import GitSignInButton from "../components/GitSignInButton";
+interface User {
+  email: string;
+  password: string;
+  name: string;
+}
 
 const SignUpPage = () => {
   const searchParams = useSearchParams();
   const [name, setName] = useState<FormDataEntryValue | string>("");
   const [email, setEmail] = useState<FormDataEntryValue | string>("");
+  const [isLoading, setIsLoading] = useState(false);
   const [password, setPassword] = useState<FormDataEntryValue | string>("");
   const [hydrated, setHydrated] = useState(false);
   const callbackUrl: any = searchParams.get("callbackUrl");
   const router = useRouter();
 
-  const handleSubmit = useCallback(
-    async (event: React.FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
+  const addUserInDbApi = useCallback(
+    async ({ email, password, name }: User) => {
       const data = { email: email, password: password, name: name };
       const JSONdata = JSON.stringify(data);
       const endpoint = "/api/register";
@@ -28,33 +35,66 @@ const SignUpPage = () => {
         },
         body: JSONdata,
       };
-      try {
-        const response = await fetch(endpoint, options);
-        if (!response.ok) {
-          alert("This email already exists");
-          return;
-        }
-        const result = await response.json();
 
-        signIn("credentials", {
-          ...data,
-          redirect: false,
-        }).then((callback) => {
+      const response = await fetch(endpoint, options);
+      return await response.json();
+    },
+    []
+  );
+
+  const AddUserInDbMutation = useMutation({
+    mutationFn: addUserInDbApi,
+  });
+
+  const addUserInDb = async ({ email, password, name }: User) => {
+    try {
+      const res = await AddUserInDbMutation.mutateAsync({
+        email,
+        password,
+        name,
+      });
+      if (res && res.error) {
+        toast.error(res.error);
+        return;
+      }
+      setIsLoading(true);
+      signIn("credentials", {
+        email,
+        password,
+        name,
+        redirect: false,
+      })
+        .then((callback) => {
           if (callback?.error) {
-            alert(callback.error);
+            toast.error(callback.error);
           }
 
           if (callback?.url) {
             router.refresh();
             router.push(callbackUrl);
           }
+        })
+        .catch((err: Error) => {
+          toast.error(err.message);
+        })
+        .finally(() => {
+          setIsLoading(false);
         });
-      } catch (err) {
-        alert(JSON.stringify(err));
-      }
+    } catch (error: any) {
+      let errorText = "Network error. Try again";
+
+      toast.error(errorText);
+    }
+  };
+  const handleSubmit = useCallback(
+    async (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      const data = { email: email, password: password, name: name };
+      addUserInDb(data);
     },
-    [email, password, name, router, signIn]
+    [email, password, name]
   );
+
   useEffect(() => {
     setHydrated(true);
   }, []);
@@ -62,7 +102,6 @@ const SignUpPage = () => {
     // Returns null on first render, so the client and server match
     return null;
   }
-
   return (
     <div className="flex min-h-full bg-slate-50 dark:bg-slate-700 dark:text-white flex-col justify-center px-6 py-12 lg:px-8 ">
       <div className="bg-indigo-50 dark:bg-slate-600/100	 rounded sm:w-1/2 w-full mx-auto   p-5 pb-10">
@@ -144,9 +183,12 @@ const SignUpPage = () => {
             <div>
               <button
                 type="submit"
+                disabled={isLoading}
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Sign up
+                {isLoading || AddUserInDbMutation.isLoading
+                  ? "Loading"
+                  : "Sign up"}
               </button>
             </div>
           </form>
