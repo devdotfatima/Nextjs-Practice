@@ -1,6 +1,6 @@
 import Blog from "./components/Blog";
 import Features from "./components/Features";
-import { GetSarted } from "./components/GetSarted";
+import GetSarted from "./components/GetStarted";
 import Hero from "./components/Hero";
 import Testimonial from "./components/Testimonial";
 import ReposPage from "./repos/page";
