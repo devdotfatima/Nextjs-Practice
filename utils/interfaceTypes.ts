@@ -1,3 +1,5 @@
+import {  User } from "@prisma/client";
+
 export interface Repository {
   id: number;
   node_id: string;
@@ -106,3 +108,13 @@ export interface License {
   spdx_id: string;
   url: string | null;
 }
+
+
+export type SafeUser = Omit<
+  User,
+  "createdAt" | "updatedAt" | "emailVerified"
+> & {
+  createdAt: string;
+  updatedAt: string;
+  emailVerified: string | null;
+};

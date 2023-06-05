@@ -1,8 +1,10 @@
+import { Suspense } from "react";
 import Blog from "./components/Blog";
 import Features from "./components/Features";
-import { GetSarted } from "./components/GetSarted";
+import GetStarted from "./components/GetStarted";
 import Hero from "./components/Hero";
 import Testimonial from "./components/Testimonial";
+import ReposPage from "./repos/page";
 
 const HomePage = () => {
   return (
@@ -10,8 +12,11 @@ const HomePage = () => {
       <Hero />
       <Features />
       <Testimonial />
-      <GetSarted />
+      <GetStarted />
       <Blog />
+      <Suspense fallback={<div>Loading ....</div>}>
+        <ReposPage />
+      </Suspense>
     </div>
   );
 };

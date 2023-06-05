@@ -1,6 +1,6 @@
 import React from "react";
 
-export const GetSarted = () => {
+const GetStarted = () => {
   return (
     <div className="  dark:from-gray-800 w-screen pt-20 pb-20 h bg-white dark:bg-slate-700 dark:text-white ">
       <div>
@@ -48,3 +48,5 @@ export const GetSarted = () => {
     </div>
   );
 };
+
+export default GetStarted;
