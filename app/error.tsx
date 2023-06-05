@@ -1,6 +1,7 @@
 "use client"; // Error components must be Client Components
 
 import { useEffect } from "react";
+import { toast } from "react-hot-toast";
 
 export default function Error({
   error,
@@ -11,20 +12,10 @@ export default function Error({
 }) {
   useEffect(() => {
     // Log the error to an error reporting service
+    toast.error(error.message);
     console.error(error);
+    return;
   }, [error]);
 
-  return (
-    <div className="min-h-screen">
-      <h2>Something went wrong!</h2>
-      <button
-        onClick={
-          // Attempt to recover by trying to re-render the segment
-          () => reset()
-        }
-      >
-        Try again
-      </button>
-    </div>
-  );
+  return <div></div>;
 }

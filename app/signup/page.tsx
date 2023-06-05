@@ -81,9 +81,7 @@ const SignUpPage = () => {
           setIsLoading(false);
         });
     } catch (error: any) {
-      let errorText = "Network error. Try again";
-
-      toast.error(errorText);
+      toast.error("Something went wrong");
     }
   };
   const handleSubmit = useCallback(

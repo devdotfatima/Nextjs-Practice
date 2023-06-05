@@ -13,10 +13,11 @@ export async function POST(request: NextRequest) {
     });
 
     if (userExists) {
-      return NextResponse.json(
-        { error: "This email already exists" },
-        { status: 409 }
-      );
+      return NextResponse.error()
+      // return NextResponse.json(
+      //   { error: "This email already exists" },
+      //   { status: 409 }
+      // );
     }
     const hashedPassword = await bcrypt.hash(password, 12);
     const user = await prisma.user.create({
